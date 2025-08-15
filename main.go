@@ -1,17 +1,7 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
-
-func cleanInput(text string) []string {
-	lowerCaseString := strings.ToLower(text)
-	trimmedString := strings.Trim(lowerCaseString, " ")
-	splitString := strings.Split(trimmedString, " ")
-	return splitString
-}
+import ()
 
 func main() {
-	fmt.Println(cleanInput("Hello, World!"))
+	startREPL()
 }
