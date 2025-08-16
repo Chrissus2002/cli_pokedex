@@ -1,10 +1,13 @@
 package main
 
-import(
-	"fmt"
-	"strings"
-	"os"
+import (
 	"bufio"
+	"fmt"
+	"os"
+	"strings"
+	"time"
+
+	"github.com/Chrissus2002/cli_pokedex/internal/pokecache"
 )
 
 type cliCommand struct{
@@ -14,6 +17,7 @@ type cliCommand struct{
 }
 
 type config struct{
+	Cache pokecache.Cache
 	Next *string `json:"next"`
 	Previous *string `json:"previous"`
 }
@@ -21,6 +25,7 @@ type config struct{
 func startREPL(){
 	scanner := bufio.NewScanner(os.Stdin)
 	conf := config{
+		Cache: *pokecache.NewCache(time.Minute * 5),
 		Next: nil,
 		Previous: nil,
 	}

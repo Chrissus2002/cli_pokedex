@@ -10,12 +10,12 @@ func commandMap(p *config) error {
 	if p.Next == nil{
 		p.Next = &url
 	}
-	locs := pokeapi.PokeMap(*p.Next)
+	locs := pokeapi.PokeMap(*p.Next, p.Cache)
 	for _, el := range locs.Results{
 		fmt.Println(el.Name)
 	}
+	p.Previous = p.Next
 	p.Next = &locs.Next
-	p.Previous = locs.Previous
 	return nil
 }
 
@@ -23,7 +23,7 @@ func commandMapPrev(p *config) error {
 	if p.Previous == nil{
 		fmt.Println("you're on the first page")
 	}else{
-		locs := pokeapi.PokeMap(*p.Previous)
+		locs := pokeapi.PokeMap(*p.Previous, p.Cache)
 		for _,el := range locs.Results{
 			fmt.Println(el.Name)
 		}
