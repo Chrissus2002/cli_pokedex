@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/Chrissus2002/cli_pokedex/internal/pokecache"
+	"github.com/Chrissus2002/cli_pokedex/internal/pokemon"
 )
 
 type cliCommand struct{
@@ -20,6 +21,7 @@ type config struct{
 	Cache pokecache.Cache
 	Next *string `json:"next"`
 	Previous *string `json:"previous"`
+	caughtPokemon	map[string]pokemon.PokemonData
 }
 
 func startREPL(){
@@ -28,6 +30,7 @@ func startREPL(){
 		Cache: *pokecache.NewCache(time.Minute * 5),
 		Next: nil,
 		Previous: nil,
+		caughtPokemon: map[string]pokemon.PokemonData{},
 	}
 	for {
 		fmt.Print("Pokedex > ")
@@ -91,6 +94,11 @@ func getCommands() map[string]cliCommand{
 			name: "explore",
 			description: "Explore a location area that you see in the Pokedex map",
 			callback: commandExplore,
+		},
+		"catch":{
+			name: "catch",
+			description: "Catch a pokemon",
+			callback: commandCatch,
 		},
 	}
 }
