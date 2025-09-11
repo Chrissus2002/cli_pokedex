@@ -5,7 +5,7 @@ import (
 	"github.com/Chrissus2002/cli_pokedex/internal/pokeapi"
 )
 
-func commandMap(p *config) error {
+func commandMap(p *config, args ...string) error {
 	url := pokeapi.Base_url + "/location-area/"
 	if p.Next == nil{
 		p.Next = &url
@@ -14,12 +14,13 @@ func commandMap(p *config) error {
 	for _, el := range locs.Results{
 		fmt.Println(el.Name)
 	}
-	p.Previous = p.Next
+
 	p.Next = &locs.Next
+	p.Previous = locs.Previous
 	return nil
 }
 
-func commandMapPrev(p *config) error {
+func commandMapPrev(p *config, args ...string) error {
 	if p.Previous == nil{
 		fmt.Println("you're on the first page")
 	}else{
