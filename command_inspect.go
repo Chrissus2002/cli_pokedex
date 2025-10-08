@@ -5,6 +5,11 @@ import (
 )
 
 func commandInspect(p *config, args ...string) error{
+	if len(args) < 1{
+		fmt.Println("Please enter a pokemon!")
+		return nil
+	}
+	
 	pokemon_name := args[0]
 	if el, ok := p.caughtPokemon[pokemon_name]; ok{
 		fmt.Println("Name:", pokemon_name)
